@@ -1,7 +1,5 @@
 import logo from "../assets/logo-dark.png";
-import { getWhatsAppUrl, instagramUrl, store } from "../config/store";
-import { InstagramIcon } from "./InstagramIcon";
-import { WhatsAppIcon } from "./WhatsAppIcon";
+import { store } from "../config/store";
 
 export function Footer() {
   return (
@@ -13,26 +11,6 @@ export function Footer() {
           loading="lazy"
           src={logo}
         />
-        <div className="flex gap-4">
-          <a
-            aria-label="WhatsApp"
-            className="grid h-11 w-11 place-items-center rounded-full border border-ink-border transition-colors hover:border-accent hover:text-ink-foreground"
-            href={getWhatsAppUrl()}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <WhatsAppIcon className="h-5 w-5" />
-          </a>
-          <a
-            aria-label="Instagram"
-            className="grid h-11 w-11 place-items-center rounded-full border border-ink-border transition-colors hover:text-ink-foreground"
-            href={instagramUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <InstagramIcon className="h-5 w-5" />
-          </a>
-        </div>
         <div className="text-xs leading-relaxed">
           <p>Venda proibida para menores de 18 anos.</p>
           <p>O Ministério da Saúde adverte: fumar causa câncer e outras doenças.</p>

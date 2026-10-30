@@ -16,7 +16,10 @@ function readEnv(name: EnvVarName, value: unknown): string {
   return parsed;
 }
 
-const supabaseUrl = readEnv("VITE_SUPABASE_URL", import.meta.env.VITE_SUPABASE_URL);
+export const supabaseUrl = readEnv(
+  "VITE_SUPABASE_URL",
+  import.meta.env.VITE_SUPABASE_URL,
+);
 const supabaseAnonKey = readEnv(
   "VITE_SUPABASE_ANON_KEY",
   import.meta.env.VITE_SUPABASE_ANON_KEY,

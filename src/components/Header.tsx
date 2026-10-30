@@ -1,6 +1,8 @@
 import { useState } from "react";
 import logo from "../assets/logo-dark.png";
 import { getWhatsAppUrl, store } from "../config/store";
+import { useCart } from "../context/CartContext";
+import { CartIcon } from "./CartIcon";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
 const navigation = [
@@ -10,7 +12,15 @@ const navigation = [
 ];
 
 export function Header() {
+  const { openCart, totalQuantity } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const badgeLabel = totalQuantity > 99 ? "99+" : String(totalQuantity);
+  const cartLabel =
+    totalQuantity === 0
+      ? "Abrir carrinho (vazio)"
+      : `Abrir carrinho (${totalQuantity} ${
+          totalQuantity === 1 ? "item" : "itens"
+        })`;
 
   function closeMenu() {
     setMenuOpen(false);
@@ -48,23 +58,40 @@ export function Header() {
             target="_blank"
           >
             <WhatsAppIcon className="h-4 w-4" />
-            Contato
+            WhatsApp
           </a>
         </nav>
 
-        <button
-          aria-controls="mobile-navigation"
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-          className="grid h-11 w-11 place-items-center md:hidden"
-          onClick={() => setMenuOpen((open) => !open)}
-          type="button"
-        >
-          <span aria-hidden="true" className="relative block h-3 w-6">
-            <span className="absolute left-0 top-0 h-0.5 w-6 bg-foreground transition-all" />
-            <span className="absolute left-0 top-3 h-0.5 w-6 bg-foreground transition-all" />
-          </span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            aria-haspopup="dialog"
+            aria-label={cartLabel}
+            className="cart-trigger"
+            onClick={openCart}
+            type="button"
+          >
+            <CartIcon className="h-5 w-5" />
+            {totalQuantity > 0 ? (
+              <span aria-hidden="true" className="cart-trigger__badge">
+                {badgeLabel}
+              </span>
+            ) : null}
+          </button>
+
+          <button
+            aria-controls="mobile-navigation"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            className="grid h-11 w-11 place-items-center md:hidden"
+            onClick={() => setMenuOpen((open) => !open)}
+            type="button"
+          >
+            <span aria-hidden="true" className="relative block h-3 w-6">
+              <span className="absolute left-0 top-0 h-0.5 w-6 bg-foreground transition-all" />
+              <span className="absolute left-0 top-3 h-0.5 w-6 bg-foreground transition-all" />
+            </span>
+          </button>
+        </div>
 
         <nav
           aria-label="Principal para celular"
@@ -77,9 +104,6 @@ export function Header() {
               {item.label}
             </a>
           ))}
-          <a href="#contato" onClick={closeMenu}>
-            Contato
-          </a>
         </nav>
       </div>
     </header>

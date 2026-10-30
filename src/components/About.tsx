@@ -1,4 +1,3 @@
-import logo from "../assets/logo-dark.png";
 import { store } from "../config/store";
 
 export function About() {
@@ -8,13 +7,7 @@ export function About() {
       className="scroll-mt-16 border-t border-ink-border bg-ink text-ink-foreground"
       id="sobre"
     >
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
-        <img
-          alt=""
-          className="mx-auto h-72 w-auto rounded-sm bg-background p-6 md:h-96"
-          loading="lazy"
-          src={logo}
-        />
+      <div className="mx-auto max-w-4xl px-5 py-20 md:py-28">
         <div>
           <div className="mb-12">
             <p className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-ink-muted">
